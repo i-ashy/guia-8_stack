@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import StepsScreen from './src/screens/StepsScreen';
 
-export default function App() {
+const App = () => {
+  const steps = [
+    { step: 1, description: 'Separa los materiales reciclables del resto de la basura.' },
+    { step: 2, description: 'Lava los envases antes de reciclarlos.'},
+    { step: 3, description: 'Identifica los contenedores de reciclaje de tu área.' },
+    { step: 4, description: 'Coloca los materiales reciclables en los contenedores correspondientes.' },
+  ];
+
+  const Stack = createStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Pasos de Reciclaje">
+        {(props) => <StepsScreen {...props} steps={steps} />}
+      </Stack.Screen>
+    </Stack.Navigator>
+  </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
